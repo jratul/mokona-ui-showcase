@@ -1,6 +1,6 @@
 "use client";
 
-// @ts-ignore
+// @ts-expect-error -- mokona-ui has no type declarations
 import { Card, Badge, Progress, Amount, Avatar, Alert, Tabs } from "mokona-ui";
 import {
   TrendingUp, TrendingDown, Send, CreditCard, Wallet, Bell,

@@ -3,15 +3,17 @@
 import { useEffect, useState } from "react";
 import { Moon, Sun } from "lucide-react";
 
+function getInitialTheme(): "light" | "dark" {
+  if (typeof window === "undefined") return "light";
+  return (localStorage.getItem("theme") as "light" | "dark" | null) ?? "light";
+}
+
 export function ThemeToggle() {
-  const [theme, setTheme] = useState<"light" | "dark">("light");
+  const [theme, setTheme] = useState<"light" | "dark">(() => getInitialTheme());
 
   useEffect(() => {
-    const stored = localStorage.getItem("theme") as "light" | "dark" | null;
-    const initial = stored ?? "light";
-    setTheme(initial);
-    document.documentElement.setAttribute("data-theme", initial);
-  }, []);
+    document.documentElement.setAttribute("data-theme", theme);
+  }, [theme]);
 
   function toggle() {
     const next = theme === "light" ? "dark" : "light";

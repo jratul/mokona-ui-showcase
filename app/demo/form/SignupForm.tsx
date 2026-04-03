@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-// @ts-ignore
+// @ts-expect-error -- mokona-ui has no type declarations
 import {
   FormRoot, FormField, FormItem, FormLabel, FormMessage,
   TextField, Select, Checkbox, Button, Alert,

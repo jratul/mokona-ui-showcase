@@ -9,6 +9,10 @@ const links = [
   { href: "/demo/transfer", label: "송금" },
   { href: "/demo/dashboard", label: "대시보드" },
   { href: "/demo/form", label: "폼" },
+  { href: "/demo/components", label: "컴포넌트" },
+  { href: "/demo/feedback", label: "피드백" },
+  { href: "/demo/inputs", label: "입력" },
+  { href: "/demo/data", label: "데이터" },
 ];
 
 export function Nav() {

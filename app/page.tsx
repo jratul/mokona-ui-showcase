@@ -12,7 +12,7 @@ const demos = [
   {
     href: "/demo/dashboard",
     title: "대시보드",
-    desc: "Card, Badge, Table, Progress, Amount 컴포넌트로 구성한 금융 대시보드",
+    desc: "Card, Badge, Progress, Amount, Tabs 컴포넌트로 구성한 금융 대시보드",
     emoji: "📊",
   },
   {
@@ -20,6 +20,30 @@ const demos = [
     title: "폼 검증",
     desc: "react-hook-form + zod로 실시간 검증되는 회원가입 폼",
     emoji: "✏️",
+  },
+  {
+    href: "/demo/components",
+    title: "컴포넌트 갤러리",
+    desc: "Button, Text, Badge, Chip, Icon, Spinner, Skeleton, Empty 한눈에 보기",
+    emoji: "🎨",
+  },
+  {
+    href: "/demo/feedback",
+    title: "피드백 & 오버레이",
+    desc: "Toast, Modal, BottomSheet, Tooltip, Popover, DropdownMenu 인터랙션",
+    emoji: "🔔",
+  },
+  {
+    href: "/demo/inputs",
+    title: "입력 컨트롤",
+    desc: "Slider, Toggle, RadioGroup, Textarea, DatePicker, Calendar 입력 모음",
+    emoji: "🎛️",
+  },
+  {
+    href: "/demo/data",
+    title: "데이터 테이블",
+    desc: "Table, Pagination, Skeleton, Empty — 필터링 & 페이지네이션 포함",
+    emoji: "📋",
   },
 ];
 
@@ -175,7 +199,7 @@ export default function HomePage() {
             >
               데모
             </h2>
-            <div className="grid gap-4 md:grid-cols-3">
+            <div className="grid gap-4 md:grid-cols-3 lg:grid-cols-4">
               {demos.map(({ href, title, desc, emoji }) => (
                 <Link
                   key={href}
