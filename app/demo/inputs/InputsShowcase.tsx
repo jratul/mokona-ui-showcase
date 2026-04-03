@@ -4,6 +4,7 @@ import { useState } from "react";
 import {
   Text, Divider, Slider, Toggle, RadioGroup, Textarea,
   DatePicker, Calendar, Card, Amount,
+  SegmentedControl, Rating, NumericSpinner,
 } from "mokona-ui";
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
@@ -226,9 +227,125 @@ function DateSection() {
   );
 }
 
+function SegmentedControlSection() {
+  const [period, setPeriod] = useState("1m");
+  const [view, setView] = useState("list");
+
+  return (
+    <Section title="SegmentedControl — 세그먼트 컨트롤">
+      <div className="flex flex-col gap-4">
+        <Card className="flex flex-col gap-4 p-5">
+          <Text variant="body2" color="muted">조회 기간</Text>
+          <SegmentedControl
+            value={period}
+            onChange={setPeriod}
+            items={[
+              { value: "1w", label: "1주" },
+              { value: "1m", label: "1개월" },
+              { value: "3m", label: "3개월" },
+              { value: "6m", label: "6개월" },
+              { value: "1y", label: "1년" },
+            ]}
+            fullWidth
+          />
+          <Text variant="caption1" color="muted">선택: {period}</Text>
+        </Card>
+        <Card className="flex flex-col gap-4 p-5">
+          <Text variant="body2" color="muted">보기 방식</Text>
+          <SegmentedControl
+            value={view}
+            onChange={setView}
+            size="sm"
+            items={[
+              { value: "list", label: "목록" },
+              { value: "grid", label: "그리드" },
+            ]}
+          />
+        </Card>
+      </div>
+    </Section>
+  );
+}
+
+function RatingSection() {
+  const [rating, setRating] = useState(0);
+  const [serviceRating, setServiceRating] = useState(4);
+
+  return (
+    <Section title="Rating — 별점">
+      <div className="flex flex-col gap-4">
+        <Card className="flex flex-col gap-4 p-5">
+          <Text variant="body1" style={{ color: "var(--color-foreground)" }}>서비스 만족도</Text>
+          <div className="flex flex-col items-center gap-3">
+            <Rating value={rating} onChange={setRating} size="lg" />
+            <Text variant="body2" color="muted">
+              {rating === 0 ? "별점을 선택해주세요" : `${rating}점 / 5점`}
+            </Text>
+          </div>
+        </Card>
+        <Card className="flex flex-col gap-4 p-5">
+          <Text variant="body1" style={{ color: "var(--color-foreground)" }}>평점 (읽기 전용)</Text>
+          <div className="flex items-center gap-3">
+            <Rating value={serviceRating} onChange={setServiceRating} size="sm" readOnly />
+            <Text variant="body2" color="muted">{serviceRating}.0 / 5.0</Text>
+          </div>
+        </Card>
+      </div>
+    </Section>
+  );
+}
+
+function NumericSpinnerSection() {
+  const [count, setCount] = useState(1);
+  const [adults, setAdults] = useState(2);
+  const [children, setChildren] = useState(0);
+
+  return (
+    <Section title="NumericSpinner — 숫자 스피너">
+      <div className="flex flex-col gap-4">
+        <Card className="flex flex-col gap-4 p-5">
+          <Text variant="body1" style={{ color: "var(--color-foreground)" }}>수량 선택</Text>
+          <div className="flex items-center justify-between">
+            <Text variant="body2" color="muted">상품 수량</Text>
+            <NumericSpinner
+              value={count}
+              onChange={setCount}
+              min={1}
+              max={99}
+            />
+          </div>
+          <Text variant="caption1" color="muted">최소 1개, 최대 99개</Text>
+        </Card>
+        <Card className="flex flex-col gap-4 p-5">
+          <Text variant="body1" style={{ color: "var(--color-foreground)" }}>인원 선택</Text>
+          <div className="flex flex-col gap-3">
+            <div className="flex items-center justify-between">
+              <div>
+                <Text variant="body2" style={{ color: "var(--color-foreground)" }}>성인</Text>
+                <Text variant="caption1" color="muted">만 13세 이상</Text>
+              </div>
+              <NumericSpinner value={adults} onChange={setAdults} min={1} max={9} />
+            </div>
+            <div className="flex items-center justify-between">
+              <div>
+                <Text variant="body2" style={{ color: "var(--color-foreground)" }}>어린이</Text>
+                <Text variant="caption1" color="muted">만 2~12세</Text>
+              </div>
+              <NumericSpinner value={children} onChange={setChildren} min={0} max={9} size="sm" />
+            </div>
+          </div>
+        </Card>
+      </div>
+    </Section>
+  );
+}
+
 export function InputsShowcase() {
   return (
     <div className="flex flex-col gap-12">
+      <SegmentedControlSection />
+      <RatingSection />
+      <NumericSpinnerSection />
       <SliderSection />
       <ToggleSection />
       <RadioSection />

@@ -1,8 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { Button, Text, Divider, Badge, Chip, Spinner, Skeleton, Empty, Amount, Icon } from "mokona-ui";
-import { Inbox, Search, Star, Heart, Download, RefreshCw, Trash2, Settings } from "lucide-react";
+import {
+  Button, Text, Divider, Badge, Chip, Spinner, Skeleton, Empty, Amount, Icon,
+  Loading, Accordion, SearchField, IconButton,
+} from "mokona-ui";
+import { Inbox, Search, Star, Heart, Download, RefreshCw, Trash2, Settings, Bell, Plus, Edit, X } from "lucide-react";
 
 const buttonVariants = ["primary", "secondary", "outline", "ghost", "danger"] as const;
 const buttonSizes = ["sm", "md", "lg"] as const;
@@ -37,6 +40,149 @@ function Section({ title, children }: { title: string; children: React.ReactNode
   );
 }
 
+function LoadingSection() {
+  return (
+    <Section title="Loading — 로딩 애니메이션">
+      <div className="grid grid-cols-3 gap-4">
+        {(["wave", "squish", "spin"] as const).map((variant) => (
+          <div
+            key={variant}
+            className="flex flex-col items-center gap-4 rounded-2xl p-8"
+            style={{ backgroundColor: "var(--color-muted)" }}
+          >
+            <Loading variant={variant} size="lg" />
+            <Text variant="caption1" color="muted">{variant}</Text>
+          </div>
+        ))}
+      </div>
+      <div className="flex flex-wrap items-end gap-6">
+        {(["sm", "md", "lg"] as const).map((size) => (
+          <div key={size} className="flex flex-col items-center gap-2">
+            <Loading variant="squish" size={size} />
+            <Text variant="caption1" color="muted">{size}</Text>
+          </div>
+        ))}
+      </div>
+    </Section>
+  );
+}
+
+function AccordionSection() {
+  return (
+    <Section title="Accordion — 아코디언">
+      <div className="flex flex-col gap-4">
+        <Accordion
+          type="single"
+          collapsible
+          items={[
+            {
+              value: "fee",
+              trigger: "수수료는 얼마인가요?",
+              content: "mokona-ui를 통한 모든 국내 송금은 완전 무료입니다. 해외 송금은 건당 2,500원의 수수료가 부과됩니다.",
+            },
+            {
+              value: "limit",
+              trigger: "1일 송금 한도는 어떻게 되나요?",
+              content: "기본 한도는 1일 5,000만원이며, 본인 인증 완료 후 최대 1억원까지 상향됩니다. 프로 요금제 사용 시 추가 한도를 신청할 수 있습니다.",
+            },
+            {
+              value: "time",
+              trigger: "송금 소요 시간은 얼마나 걸리나요?",
+              content: "국내 은행 간 송금은 실시간으로 처리됩니다. 단, 은행별 점검 시간(보통 자정~새벽 1시)에는 다음 날 처리될 수 있습니다.",
+            },
+            {
+              value: "cancel",
+              trigger: "송금 취소가 가능한가요?",
+              content: "실시간 처리 특성상 송금 완료 후 취소는 불가능합니다. 받는 분에게 직접 반환을 요청해주세요.",
+            },
+          ]}
+        />
+        <Accordion
+          type="multiple"
+          defaultValue={["plan", "security"]}
+          items={[
+            {
+              value: "plan",
+              trigger: "요금제 비교",
+              content: "무료: 월 10회 송금 / 베이직(2,900원): 월 50회 / 프로(6,900원): 무제한 + 해외 이체",
+            },
+            {
+              value: "security",
+              trigger: "보안 정책",
+              content: "256-bit AES 암호화 및 TLS 1.3 통신 보안을 적용합니다. 생체인증 및 OTP 2단계 인증을 지원합니다.",
+            },
+            {
+              value: "support",
+              trigger: "고객센터 운영시간",
+              content: "평일 09:00 ~ 18:00 (주말·공휴일 휴무). 앱 내 챗봇은 24시간 운영됩니다.",
+              disabled: false,
+            },
+          ]}
+        />
+        <Text variant="caption1" color="muted">위: single 모드 (하나만 열림) / 아래: multiple 모드 (여러 개 열림)</Text>
+      </div>
+    </Section>
+  );
+}
+
+function SearchFieldSection() {
+  const [query, setQuery] = useState("");
+
+  return (
+    <Section title="SearchField — 검색 입력">
+      <div className="flex flex-col gap-3">
+        <SearchField
+          value={query}
+          onChange={setQuery}
+          onClear={() => setQuery("")}
+          placeholder="은행, 거래처 검색"
+        />
+        {query && (
+          <Text variant="caption1" color="muted">검색어: {query}</Text>
+        )}
+      </div>
+    </Section>
+  );
+}
+
+function IconButtonSection() {
+  return (
+    <Section title="IconButton — 아이콘 버튼">
+      <div className="flex flex-col gap-4">
+        <div className="flex flex-wrap items-center gap-3">
+          {(["primary", "secondary", "outline", "ghost", "danger"] as const).map((variant) => (
+            <IconButton key={variant} variant={variant} aria-label={variant}>
+              <Bell size={18} />
+            </IconButton>
+          ))}
+        </div>
+        <div className="flex flex-wrap items-end gap-3">
+          {(["sm", "md", "lg"] as const).map((size) => (
+            <div key={size} className="flex flex-col items-center gap-1">
+              <IconButton size={size} aria-label={`size ${size}`}>
+                <Plus size={size === "sm" ? 14 : size === "md" ? 18 : 22} />
+              </IconButton>
+              <Text variant="caption1" color="muted">{size}</Text>
+            </div>
+          ))}
+        </div>
+        <div className="flex flex-wrap items-center gap-3">
+          <IconButton shape="rounded" aria-label="수정">
+            <Edit size={18} />
+          </IconButton>
+          <IconButton shape="circle" aria-label="닫기" variant="outline">
+            <X size={18} />
+          </IconButton>
+          <IconButton disabled aria-label="비활성화">
+            <Settings size={18} />
+          </IconButton>
+        </div>
+        <Text variant="caption1" color="muted">rounded / circle shape, disabled 지원</Text>
+      </div>
+    </Section>
+  );
+}
+
 export function ComponentsShowcase() {
   const [selectedChips, setSelectedChips] = useState<string[]>(["react", "typescript"]);
   const [loadingBtn, setLoadingBtn] = useState(false);
@@ -62,6 +208,18 @@ export function ComponentsShowcase() {
 
   return (
     <div className="flex flex-col gap-12">
+      {/* Loading */}
+      <LoadingSection />
+
+      {/* Accordion */}
+      <AccordionSection />
+
+      {/* SearchField */}
+      <SearchFieldSection />
+
+      {/* IconButton */}
+      <IconButtonSection />
+
       {/* Text */}
       <Section title="Text — 타이포그래피">
         <div className="flex flex-col gap-3 rounded-2xl p-5" style={{ backgroundColor: "var(--color-muted)" }}>

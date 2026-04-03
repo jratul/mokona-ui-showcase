@@ -24,25 +24,25 @@ const demos = [
   {
     href: "/demo/components",
     title: "컴포넌트 갤러리",
-    desc: "Button, Text, Badge, Chip, Icon, Spinner, Skeleton, Empty 한눈에 보기",
+    desc: "Button, Text, Badge, Chip, Icon, Loading, Accordion, SearchField, IconButton 한눈에 보기",
     emoji: "🎨",
   },
   {
     href: "/demo/feedback",
     title: "피드백 & 오버레이",
-    desc: "Toast, Modal, BottomSheet, Tooltip, Popover, DropdownMenu 인터랙션",
+    desc: "Toast, Modal, Dialog, BottomSheet, BottomCTA, Result, Tooltip, Popover, DropdownMenu",
     emoji: "🔔",
   },
   {
     href: "/demo/inputs",
     title: "입력 컨트롤",
-    desc: "Slider, Toggle, RadioGroup, Textarea, DatePicker, Calendar 입력 모음",
+    desc: "SegmentedControl, Rating, NumericSpinner, Slider, Toggle, RadioGroup, Textarea, DatePicker",
     emoji: "🎛️",
   },
   {
     href: "/demo/data",
     title: "데이터 테이블",
-    desc: "Table, Pagination, Skeleton, Empty — 필터링 & 페이지네이션 포함",
+    desc: "ListRow, Table, Pagination, Skeleton, Empty — 필터링 & 페이지네이션 포함",
     emoji: "📋",
   },
 ];

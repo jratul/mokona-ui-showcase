@@ -4,6 +4,7 @@ import { useState } from "react";
 import {
   Button, Text, Divider, Alert, Modal, BottomSheet,
   Tooltip, Popover, DropdownMenu, Toaster, toast,
+  AlertDialog, ConfirmDialog, BottomCTA, Result,
 } from "mokona-ui";
 import {
   Info, CheckCircle, AlertTriangle, XCircle,
@@ -331,6 +332,143 @@ function DropdownMenuSection() {
   );
 }
 
+function DialogSection() {
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [confirmOpen, setConfirmOpen] = useState(false);
+  const [destructiveOpen, setDestructiveOpen] = useState(false);
+
+  return (
+    <Section title="Dialog — 다이얼로그">
+      <div className="flex flex-wrap gap-3">
+        <Button variant="outline" onClick={() => setAlertOpen(true)}>알림 다이얼로그</Button>
+        <Button variant="outline" onClick={() => setConfirmOpen(true)}>확인 다이얼로그</Button>
+        <Button variant="danger" onClick={() => setDestructiveOpen(true)}>위험 확인 다이얼로그</Button>
+      </div>
+
+      <AlertDialog
+        open={alertOpen}
+        onOpenChange={setAlertOpen}
+        title="인증이 완료되었습니다"
+        description="본인 인증이 성공적으로 완료되었습니다. 이제 모든 서비스를 이용할 수 있습니다."
+        confirmLabel="확인"
+        onConfirm={() => { setAlertOpen(false); toast({ variant: "positive", description: "확인되었습니다." }); }}
+      />
+
+      <ConfirmDialog
+        open={confirmOpen}
+        onOpenChange={setConfirmOpen}
+        title="자동이체를 설정할까요?"
+        description="매월 25일 급여 계좌에서 저축 계좌로 30만원이 자동 이체됩니다."
+        confirmLabel="설정하기"
+        cancelLabel="나중에"
+        onConfirm={() => { setConfirmOpen(false); toast({ variant: "positive", description: "자동이체가 설정되었습니다." }); }}
+        onCancel={() => setConfirmOpen(false)}
+      />
+
+      <ConfirmDialog
+        open={destructiveOpen}
+        onOpenChange={setDestructiveOpen}
+        title="계좌를 삭제하시겠습니까?"
+        description="삭제된 계좌와 연결된 모든 자동이체 및 내역이 영구 삭제됩니다. 이 작업은 되돌릴 수 없습니다."
+        confirmLabel="삭제"
+        cancelLabel="취소"
+        destructive
+        onConfirm={() => { setDestructiveOpen(false); toast({ variant: "negative", description: "계좌가 삭제되었습니다." }); }}
+        onCancel={() => setDestructiveOpen(false)}
+      />
+    </Section>
+  );
+}
+
+function BottomCTASection() {
+  const [singleOpen, setSingleOpen] = useState(false);
+  const [doubleOpen, setDoubleOpen] = useState(false);
+
+  return (
+    <Section title="BottomCTA — 하단 CTA 버튼">
+      <div className="flex flex-wrap gap-3">
+        <Button variant="outline" onClick={() => setSingleOpen(true)}>단일 버튼</Button>
+        <Button variant="outline" onClick={() => setDoubleOpen(true)}>이중 버튼</Button>
+      </div>
+
+      {singleOpen && (
+        <div className="fixed inset-0 z-50" onClick={() => setSingleOpen(false)}>
+          <div className="absolute inset-0" style={{ backgroundColor: "rgba(0,0,0,0.4)" }} />
+          <div className="absolute bottom-0 left-0 right-0" onClick={(e) => e.stopPropagation()}>
+            <div className="rounded-t-3xl p-6 pb-10" style={{ backgroundColor: "var(--color-background)" }}>
+              <p className="mb-6 text-center text-[16px] font-semibold" style={{ color: "var(--color-foreground)" }}>
+                송금을 완료하시겠습니까?
+              </p>
+              <BottomCTA
+                primaryLabel="송금하기"
+                onPrimary={() => { setSingleOpen(false); toast({ variant: "positive", description: "송금이 완료되었습니다." }); }}
+              />
+            </div>
+          </div>
+        </div>
+      )}
+
+      {doubleOpen && (
+        <div className="fixed inset-0 z-50" onClick={() => setDoubleOpen(false)}>
+          <div className="absolute inset-0" style={{ backgroundColor: "rgba(0,0,0,0.4)" }} />
+          <div className="absolute bottom-0 left-0 right-0" onClick={(e) => e.stopPropagation()}>
+            <div className="rounded-t-3xl p-6 pb-10" style={{ backgroundColor: "var(--color-background)" }}>
+              <p className="mb-6 text-center text-[16px] font-semibold" style={{ color: "var(--color-foreground)" }}>
+                변경 사항을 저장하시겠습니까?
+              </p>
+              <BottomCTA
+                primaryLabel="저장하기"
+                secondaryLabel="취소"
+                onPrimary={() => { setDoubleOpen(false); toast({ variant: "positive", description: "저장되었습니다." }); }}
+                onSecondary={() => setDoubleOpen(false)}
+              />
+            </div>
+          </div>
+        </div>
+      )}
+    </Section>
+  );
+}
+
+function ResultSection() {
+  return (
+    <Section title="Result — 결과 화면">
+      <div className="grid gap-4 md:grid-cols-2">
+        <div className="rounded-2xl" style={{ border: "1px solid var(--color-border)" }}>
+          <Result
+            status="success"
+            title="송금 완료"
+            description="홍길동님에게 50,000원을 성공적으로 송금했습니다."
+            extra={<Button size="sm" variant="outline">거래 내역 보기</Button>}
+          />
+        </div>
+        <div className="rounded-2xl" style={{ border: "1px solid var(--color-border)" }}>
+          <Result
+            status="error"
+            title="송금 실패"
+            description="잔액이 부족하거나 일시적인 오류가 발생했습니다."
+            extra={<Button size="sm" variant="outline">다시 시도</Button>}
+          />
+        </div>
+        <div className="rounded-2xl" style={{ border: "1px solid var(--color-border)" }}>
+          <Result
+            status="warning"
+            title="한도 초과"
+            description="1일 송금 한도(5,000만원)를 초과했습니다. 내일 다시 시도해주세요."
+          />
+        </div>
+        <div className="rounded-2xl" style={{ border: "1px solid var(--color-border)" }}>
+          <Result
+            status="info"
+            title="처리 중"
+            description="은행 점검으로 인해 송금이 지연되고 있습니다. 잠시 후 완료됩니다."
+          />
+        </div>
+      </div>
+    </Section>
+  );
+}
+
 export function FeedbackShowcase() {
   return (
     <>
@@ -338,8 +476,11 @@ export function FeedbackShowcase() {
       <div className="flex flex-col gap-12">
         <AlertSection />
         <ToastSection />
+        <DialogSection />
         <ModalSection />
         <BottomSheetSection />
+        <BottomCTASection />
+        <ResultSection />
         <TooltipSection />
         <PopoverSection />
         <DropdownMenuSection />

@@ -3,9 +3,9 @@
 import { useState } from "react";
 import {
   Text, Divider, Table, Pagination, Skeleton, Empty,
-  Badge, Amount, Avatar, Button, Tabs,
+  Badge, Amount, Avatar, Button, Tabs, ListRow, Card,
 } from "mokona-ui";
-import { FileSearch, RefreshCw } from "lucide-react";
+import { FileSearch, RefreshCw, CreditCard, Wallet, Send, Bell, ChevronRight, Settings } from "lucide-react";
 
 type TransactionStatus = "completed" | "pending" | "failed";
 
@@ -243,9 +243,108 @@ function SkeletonTableSection() {
   );
 }
 
+function ListRowSection() {
+  const accounts = [
+    { bank: "토스뱅크", number: "100-012-345678", balance: 12543200, icon: CreditCard },
+    { bank: "국민은행", number: "123-45-678901", balance: 3200000, icon: Wallet },
+    { bank: "카카오뱅크", number: "3333-01-2345678", balance: 540000, icon: Send },
+  ];
+
+  const menuItems = [
+    { label: "알림 설정", desc: "푸시·이메일·SMS", icon: Bell },
+    { label: "보안 설정", desc: "생체인증·OTP 관리", icon: Settings },
+    { label: "계좌 관리", desc: "연결 계좌 추가·삭제", icon: CreditCard },
+  ];
+
+  return (
+    <Section title="ListRow — 목록 행">
+      <div className="flex flex-col gap-4">
+        <Card className="overflow-hidden p-0">
+          {accounts.map(({ bank, number, balance, icon: Icon }, i) => (
+            <ListRow
+              key={bank}
+              left={
+                <div
+                  className="flex h-10 w-10 items-center justify-center rounded-xl"
+                  style={{
+                    backgroundColor: "color-mix(in srgb, var(--color-primary) 10%, transparent)",
+                    color: "var(--color-primary)",
+                  }}
+                >
+                  <Icon size={18} />
+                </div>
+              }
+              title={bank}
+              subtitle={number}
+              rightLabel={balance.toLocaleString() + "원"}
+              rightSubLabel="잔액"
+              chevron
+              onClick={() => {}}
+              className={i < accounts.length - 1 ? "border-b border-(--color-border)" : ""}
+            />
+          ))}
+        </Card>
+
+        <Card className="overflow-hidden p-0">
+          {menuItems.map(({ label, desc, icon: Icon }, i) => (
+            <ListRow
+              key={label}
+              left={
+                <div
+                  className="flex h-9 w-9 items-center justify-center rounded-xl"
+                  style={{ backgroundColor: "var(--color-muted)", color: "var(--color-muted-foreground)" }}
+                >
+                  <Icon size={16} />
+                </div>
+              }
+              title={label}
+              subtitle={desc}
+              right={<ChevronRight size={16} style={{ color: "var(--color-muted-foreground)" }} />}
+              onClick={() => {}}
+              className={i < menuItems.length - 1 ? "border-b border-(--color-border)" : ""}
+            />
+          ))}
+        </Card>
+
+        <Card className="overflow-hidden p-0">
+          <ListRow
+            left={<Avatar size="md" fallback="홍" />}
+            title="홍길동"
+            subtitle="자주 보내는 연락처"
+            rightLabel="50,000원"
+            rightSubLabel="최근 송금"
+            chevron
+            onClick={() => {}}
+          />
+          <ListRow
+            left={<Avatar size="md" fallback="김" />}
+            title="김철수"
+            subtitle="카카오뱅크"
+            rightLabel="120,000원"
+            rightSubLabel="최근 송금"
+            chevron
+            onClick={() => {}}
+            className="border-t border-(--color-border)"
+          />
+          <ListRow
+            left={<Avatar size="md" fallback="이" />}
+            title="이영희 (비활성)"
+            subtitle="우리은행"
+            chevron
+            disabled
+            onClick={() => {}}
+            className="border-t border-(--color-border)"
+          />
+        </Card>
+      </div>
+    </Section>
+  );
+}
+
 export function DataShowcase() {
   return (
     <div className="flex flex-col gap-12">
+      <ListRowSection />
       <TableSection />
       <SkeletonTableSection />
     </div>
