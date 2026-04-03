@@ -1,7 +1,7 @@
 # mokona-ui-showcase
 
 [mokona-ui](https://github.com/jratul/mokona-ui)의 공식 쇼케이스 & 문서 사이트.  
-Toss 스타일 React UI 컴포넌트 라이브러리를 인터랙티브 데모와 함께 소개합니다.
+mokona-ui React 컴포넌트 라이브러리를 인터랙티브 데모와 함께 소개합니다.
 
 ---
 

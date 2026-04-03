@@ -3,7 +3,7 @@
 ## 프로젝트 개요
 
 `mokona-ui`의 공식 쇼케이스 & 문서 사이트.  
-Toss 스타일 React UI 컴포넌트 라이브러리를 인터랙티브 데모와 함께 소개한다.
+mokona-ui React 컴포넌트 라이브러리를 인터랙티브 데모와 함께 소개한다.
 
 - **라이브러리 저장소**: https://github.com/jratul/mokona-ui
 - **패키지 매니저**: pnpm (workspace 설정 포함)

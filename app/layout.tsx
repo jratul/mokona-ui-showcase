@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "mokona-ui — Toss-style React UI Library",
-  description: "토스 스타일 React 컴포넌트 라이브러리 쇼케이스",
+  title: "mokona-ui — React UI Library",
+  description: "mokona-ui React 컴포넌트 라이브러리 쇼케이스",
 };
 
 export default function RootLayout({

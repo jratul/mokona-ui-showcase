@@ -50,8 +50,8 @@ const demos = [
 const features = [
   {
     icon: Zap,
-    title: "Toss 스타일",
-    desc: "토스 디자인 언어 기반 CSS 변수 테마. 다크모드 포함.",
+    title: "디자인 시스템",
+    desc: "CSS 변수 기반 일관된 디자인 토큰. 다크모드 포함.",
   },
   {
     icon: Palette,
@@ -85,7 +85,7 @@ export default function HomePage() {
             }}
           >
             <Zap size={12} />
-            Toss-style React UI Library
+            React UI Library
           </div>
           <h1
             className="mb-4 text-[48px] font-bold leading-tight tracking-tight"
@@ -97,7 +97,7 @@ export default function HomePage() {
             className="mb-10 text-[18px]"
             style={{ color: "var(--color-muted-foreground)" }}
           >
-            토스 스타일의 React 컴포넌트 라이브러리.
+            세련된 React 컴포넌트 라이브러리.
             <br />
             Radix UI + Tailwind CSS + Framer Motion.
           </p>
