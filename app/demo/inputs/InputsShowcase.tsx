@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-// @ts-expect-error -- mokona-ui has no type declarations
 import {
   Text, Divider, Slider, Toggle, RadioGroup, Textarea,
   DatePicker, Calendar, Card, Amount,

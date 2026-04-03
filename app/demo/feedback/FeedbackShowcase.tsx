@@ -1,10 +1,9 @@
 "use client";
 
 import { useState } from "react";
-// @ts-expect-error -- mokona-ui has no type declarations
 import {
   Button, Text, Divider, Alert, Modal, BottomSheet,
-  Tooltip, Popover, DropdownMenu, Toaster, useToast,
+  Tooltip, Popover, DropdownMenu, Toaster, toast,
 } from "mokona-ui";
 import {
   Info, CheckCircle, AlertTriangle, XCircle,
@@ -39,7 +38,6 @@ function AlertSection() {
 }
 
 function ToastSection() {
-  const { toast } = useToast();
 
   return (
     <Section title="Toast — 토스트 알림">
@@ -76,7 +74,7 @@ function ToastSection() {
           onClick={() =>
             toast({
               description: "파일이 삭제되었습니다.",
-              action: { label: "실행 취소", onClick: () => toast({ description: "삭제가 취소되었습니다." }) },
+              action: <button onClick={() => toast({ description: "삭제가 취소되었습니다." })} className="text-[13px] font-medium underline" style={{ color: "var(--color-primary)" }}>실행 취소</button>,
             })
           }
         >
@@ -290,7 +288,6 @@ function PopoverSection() {
 }
 
 function DropdownMenuSection() {
-  const { toast } = useToast();
 
   const menuItems = [
     { type: "item" as const, label: "수정", icon: <Edit size={14} />, onSelect: () => toast({ description: "수정 클릭" }) },

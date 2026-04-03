@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-// @ts-expect-error -- mokona-ui has no type declarations
 import { Button, Text, Divider, Badge, Chip, Spinner, Skeleton, Empty, Amount, Icon } from "mokona-ui";
 import { Inbox, Search, Star, Heart, Download, RefreshCw, Trash2, Settings } from "lucide-react";
 

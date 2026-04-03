@@ -1,5 +1,5 @@
 import { Nav } from "@/components/Nav";
-import { FeedbackShowcase } from "./FeedbackShowcase";
+import { FeedbackClient } from "./FeedbackClient";
 
 export default function FeedbackPage() {
   return (
@@ -14,7 +14,7 @@ export default function FeedbackPage() {
             Toast, Modal, BottomSheet, Tooltip, Popover, DropdownMenu, Alert 컴포넌트 모음
           </p>
         </div>
-        <FeedbackShowcase />
+        <FeedbackClient />
       </main>
     </>
   );

@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-// @ts-expect-error -- mokona-ui has no type declarations
 import { Stepper, Select, TextField, Button, OTPInput, Alert, Amount } from "mokona-ui";
 
 type Step = 0 | 1 | 2 | 3;

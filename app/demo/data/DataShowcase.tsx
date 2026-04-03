@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-// @ts-expect-error -- mokona-ui has no type declarations
 import {
   Text, Divider, Table, Pagination, Skeleton, Empty,
   Badge, Amount, Avatar, Button, Tabs,
