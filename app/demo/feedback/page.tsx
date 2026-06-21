@@ -5,7 +5,7 @@ export default function FeedbackPage() {
   return (
     <>
       <Nav />
-      <main className="mx-auto max-w-3xl px-4 py-12">
+      <main className="mx-auto max-w-5xl px-4 py-12">
         <div className="mb-10">
           <h1 className="text-[28px] font-bold" style={{ color: "var(--color-foreground)" }}>
             피드백 & 오버레이
