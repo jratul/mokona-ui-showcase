@@ -86,23 +86,24 @@ function ToggleSection() {
   const [autoSave, setAutoSave] = useState(true);
 
   const toggles = [
-    { label: "푸시 알림", description: "새로운 알림을 푸시로 받습니다.", value: push, onChange: setPush },
-    { label: "이메일 알림", description: "주요 업데이트를 이메일로 받습니다.", value: email, onChange: setEmail },
-    { label: "SMS 인증", description: "로그인 시 SMS 2단계 인증을 사용합니다.", value: sms, onChange: setSms },
-    { label: "다크 모드", description: "어두운 테마를 사용합니다.", value: darkMode, onChange: setDarkMode },
-    { label: "자동 저장", description: "작업 내용을 자동으로 저장합니다.", value: autoSave, onChange: setAutoSave },
+    { label: "푸시 알림", description: "새로운 알림을 푸시로 받습니다.", value: push, onChange: setPush, size: "sm" as const },
+    { label: "이메일 알림", description: "주요 업데이트를 이메일로 받습니다.", value: email, onChange: setEmail, size: "md" as const },
+    { label: "SMS 인증", description: "로그인 시 SMS 2단계 인증을 사용합니다.", value: sms, onChange: setSms, size: "md" as const },
+    { label: "다크 모드", description: "어두운 테마를 사용합니다.", value: darkMode, onChange: setDarkMode, size: "lg" as const },
+    { label: "자동 저장", description: "작업 내용을 자동으로 저장합니다.", value: autoSave, onChange: setAutoSave, size: "md" as const },
   ];
 
   return (
     <Section title="Toggle — 토글 스위치">
       <Card className="flex flex-col divide-y p-0" style={{ borderColor: "var(--color-border)" }}>
-        {toggles.map(({ label, description, value, onChange }) => (
+        {toggles.map(({ label, description, value, onChange, size }) => (
           <div key={label} className="px-5 py-4">
             <Toggle
               label={label}
               description={description}
               checked={value}
               onCheckedChange={onChange}
+              size={size}
             />
           </div>
         ))}
@@ -123,6 +124,7 @@ function RadioSection() {
           <RadioGroup
             value={plan}
             onValueChange={setPlan}
+            size="lg"
             items={[
               { value: "free", label: "무료", description: "월 10회 송금, 기본 조회" },
               { value: "basic", label: "베이직 — 월 2,900원", description: "월 50회 송금, 전체 내역 조회" },
@@ -137,6 +139,7 @@ function RadioSection() {
             value={notify}
             onValueChange={setNotify}
             orientation="horizontal"
+            size="sm"
             items={[
               { value: "push", label: "푸시" },
               { value: "email", label: "이메일" },
