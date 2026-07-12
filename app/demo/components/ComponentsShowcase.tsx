@@ -28,9 +28,9 @@ const textVariants = [
   { variant: "caption1", label: "Caption 1 — 캡션" },
 ] as const;
 
-function Section({ title, children }: { title: string; children: React.ReactNode }) {
+function Section({ id, title, children }: { id?: string; title: string; children: React.ReactNode }) {
   return (
-    <div className="flex flex-col gap-4">
+    <div id={id} className="flex flex-col gap-4 scroll-mt-20">
       <Text variant="title2" style={{ color: "var(--color-foreground)" }}>
         {title}
       </Text>
@@ -40,9 +40,9 @@ function Section({ title, children }: { title: string; children: React.ReactNode
   );
 }
 
-function LoadingSection() {
+function LoadingSection({ id }: { id?: string }) {
   return (
-    <Section title="Loading — 로딩 애니메이션">
+    <Section id={id} title="Loading — 로딩 애니메이션">
       <div className="grid grid-cols-3 gap-4">
         {(["wave", "squish", "spin"] as const).map((variant) => (
           <div
@@ -67,9 +67,9 @@ function LoadingSection() {
   );
 }
 
-function AccordionSection() {
+function AccordionSection({ id }: { id?: string }) {
   return (
-    <Section title="Accordion — 아코디언">
+    <Section id={id} title="Accordion — 아코디언">
       <div className="flex flex-col gap-4">
         <Accordion
           type="single"
@@ -125,11 +125,11 @@ function AccordionSection() {
   );
 }
 
-function SearchFieldSection() {
+function SearchFieldSection({ id }: { id?: string }) {
   const [query, setQuery] = useState("");
 
   return (
-    <Section title="SearchField — 검색 입력">
+    <Section id={id} title="SearchField — 검색 입력">
       <div className="flex flex-col gap-3">
         <SearchField
           value={query}
@@ -145,9 +145,9 @@ function SearchFieldSection() {
   );
 }
 
-function IconButtonSection() {
+function IconButtonSection({ id }: { id?: string }) {
   return (
-    <Section title="IconButton — 아이콘 버튼">
+    <Section id={id} title="IconButton — 아이콘 버튼">
       <div className="flex flex-col gap-4">
         <div className="flex flex-wrap items-center gap-3">
           {(["primary", "secondary", "outline", "ghost", "danger"] as const).map((variant) => (
@@ -209,19 +209,19 @@ export function ComponentsShowcase() {
   return (
     <div className="flex flex-col gap-12">
       {/* Loading */}
-      <LoadingSection />
+      <LoadingSection id="loading" />
 
       {/* Accordion */}
-      <AccordionSection />
+      <AccordionSection id="accordion" />
 
       {/* SearchField */}
-      <SearchFieldSection />
+      <SearchFieldSection id="searchfield" />
 
       {/* IconButton */}
-      <IconButtonSection />
+      <IconButtonSection id="iconbutton" />
 
       {/* Text */}
-      <Section title="Text — 타이포그래피">
+      <Section id="text" title="Text — 타이포그래피">
         <div className="flex flex-col gap-3 rounded-2xl p-5" style={{ backgroundColor: "var(--color-muted)" }}>
           {textVariants.map(({ variant, label }) => (
             <Text key={variant} variant={variant} style={{ color: "var(--color-foreground)" }}>
@@ -239,7 +239,7 @@ export function ComponentsShowcase() {
       </Section>
 
       {/* Button */}
-      <Section title="Button — 버튼">
+      <Section id="button" title="Button — 버튼">
         <div className="flex flex-col gap-4">
           <div className="flex flex-wrap gap-3">
             {buttonVariants.map((v) => (
@@ -266,7 +266,7 @@ export function ComponentsShowcase() {
       </Section>
 
       {/* Badge */}
-      <Section title="Badge — 배지">
+      <Section id="badge" title="Badge — 배지">
         <div className="flex flex-col gap-3">
           {(["sm", "md", "lg"] as const).map((size) => (
             <div key={size} className="flex flex-wrap items-center gap-2">
@@ -282,7 +282,7 @@ export function ComponentsShowcase() {
       </Section>
 
       {/* Chip */}
-      <Section title="Chip — 선택 태그">
+      <Section id="chip" title="Chip — 선택 태그">
         <div className="flex flex-wrap gap-2">
           {chips.map(({ id, label }) => (
             <Chip
@@ -300,7 +300,7 @@ export function ComponentsShowcase() {
       </Section>
 
       {/* Icon */}
-      <Section title="Icon — 아이콘">
+      <Section id="icon" title="Icon — 아이콘">
         <div className="flex flex-wrap items-end gap-4">
           {([
             { icon: Star, label: "Star" },
@@ -327,7 +327,7 @@ export function ComponentsShowcase() {
       </Section>
 
       {/* Amount */}
-      <Section title="Amount — 금액 표시">
+      <Section id="amount" title="Amount — 금액 표시">
         <div className="flex flex-col gap-3 rounded-2xl p-5" style={{ backgroundColor: "var(--color-muted)" }}>
           <Amount value={12543200} locale="ko-KR" currency="KRW" variant="display1" />
           <Amount value={3200000} locale="ko-KR" currency="KRW" variant="title1" colorBySign showSign />
@@ -337,7 +337,7 @@ export function ComponentsShowcase() {
       </Section>
 
       {/* Divider */}
-      <Section title="Divider — 구분선">
+      <Section id="divider" title="Divider — 구분선">
         <div className="flex flex-col gap-3">
           <Divider spacing="sm" />
           <Divider spacing="md" />
@@ -353,7 +353,7 @@ export function ComponentsShowcase() {
       </Section>
 
       {/* Spinner */}
-      <Section title="Spinner — 로딩 스피너">
+      <Section id="spinner" title="Spinner — 로딩 스피너">
         <div className="flex flex-wrap items-end gap-8">
           {(["sm", "md", "lg", "xl"] as const).map((size) => (
             <div key={size} className="flex flex-col items-center gap-2">
@@ -379,7 +379,7 @@ export function ComponentsShowcase() {
       </Section>
 
       {/* Skeleton */}
-      <Section title="Skeleton — 스켈레톤">
+      <Section id="skeleton" title="Skeleton — 스켈레톤">
         <div className="flex flex-col gap-3">
           <div className="flex items-center gap-3">
             <Skeleton variant="circular" width={48} height={48} />
@@ -394,7 +394,7 @@ export function ComponentsShowcase() {
       </Section>
 
       {/* Empty */}
-      <Section title="Empty — 빈 상태">
+      <Section id="empty" title="Empty — 빈 상태">
         <div
           className="rounded-2xl"
           style={{ border: "1px solid var(--color-border)" }}
