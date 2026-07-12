@@ -6,7 +6,7 @@ export default function ComponentsPage() {
   return (
     <>
       <Nav />
-      <div className="mx-auto flex w-full max-w-7xl items-start gap-10 px-4 py-12">
+      <div className="mx-auto flex w-full max-w-7xl gap-10 px-4 py-12">
         <main className="min-w-0 w-full max-w-5xl flex-1">
           <div className="mb-10">
             <h1 className="text-[28px] font-bold" style={{ color: "var(--color-foreground)" }}>
