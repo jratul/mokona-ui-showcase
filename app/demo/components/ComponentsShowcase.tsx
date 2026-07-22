@@ -3,7 +3,7 @@
 import { useState } from "react";
 import {
   Button, Text, Divider, Badge, Chip, Spinner, Skeleton, Empty, Amount, Icon,
-  Loading, Accordion, SearchField, IconButton,
+  Loading, Accordion, SearchField, IconButton, Progress,
 } from "mokona-ui";
 import { Inbox, Search, Star, Heart, Download, RefreshCw, Trash2, Settings, Bell, Plus, Edit, X } from "lucide-react";
 
@@ -349,6 +349,31 @@ export function ComponentsShowcase() {
             <Divider orientation="vertical" />
             <Text variant="body2" color="muted">예시</Text>
           </div>
+        </div>
+      </Section>
+
+      {/* Progress */}
+      <Section id="progress" title="Progress — 진행률 표시">
+        <div className="flex flex-col gap-3">
+          {[0, 35, 72, 100].map((v) => (
+            <Progress key={v} value={v} showLabel />
+          ))}
+        </div>
+        <div className="flex flex-col gap-4">
+          {(["sm", "md", "lg"] as const).map((size) => (
+            <div key={size} className="flex flex-col gap-1">
+              <Text variant="caption1" color="muted">{size}</Text>
+              <Progress value={60} size={size} />
+            </div>
+          ))}
+        </div>
+        <div className="flex flex-col gap-3">
+          {(["primary", "positive", "negative", "warning"] as const).map((color) => (
+            <div key={color} className="flex flex-col gap-1">
+              <Text variant="caption1" color="muted">{color}</Text>
+              <Progress value={60} color={color} />
+            </div>
+          ))}
         </div>
       </Section>
 

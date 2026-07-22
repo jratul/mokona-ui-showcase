@@ -14,6 +14,7 @@ const TOC_ITEMS = [
   { id: "icon", label: "Icon" },
   { id: "amount", label: "Amount" },
   { id: "divider", label: "Divider" },
+  { id: "progress", label: "Progress" },
   { id: "spinner", label: "Spinner" },
   { id: "skeleton", label: "Skeleton" },
   { id: "empty", label: "Empty" },
